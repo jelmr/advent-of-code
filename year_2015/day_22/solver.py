@@ -3,8 +3,8 @@ import heapq
 import math
 from typing import Iterator, List
 
-from Spells import MagicMissile, Drain, Shield, Poison, Recharge
-from state import State
+from .Spells import MagicMissile, Drain, Shield, Poison, Recharge
+from .state import State
 
 
 class Solver:

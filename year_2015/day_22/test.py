@@ -1,7 +1,7 @@
 import unittest
 
-from config import Config
-from solver import Solver
+from .config import Config
+from .solver import Solver
 
 
 class TestSolver(unittest.TestCase):

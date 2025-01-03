@@ -1,0 +1,8 @@
+from typing import List
+
+from solution import Solution
+
+
+class Part2(Solution):
+    def solve(self, input_text: List[str]) -> str | int:
+        return None

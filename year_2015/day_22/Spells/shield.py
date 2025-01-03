@@ -1,5 +1,6 @@
-from Spells.spell import Spell
-from state import State
+from .spell import Spell
+from ..state import State
+
 
 
 class Shield(Spell):
