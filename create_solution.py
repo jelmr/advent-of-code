@@ -5,7 +5,8 @@ import os
 
 # Creates the necessary directory structure for the given day/year, and copies the filled in templates to that directory
 def create_day(year: int, day: int):
-    dir_name = f'year_{year}/day_{day}/'
+    day_str = str(day).zfill(2)
+    dir_name = f'year_{year}/day_{day_str}/'
 
     os.makedirs(dir_name, exist_ok=True)
 
@@ -16,7 +17,7 @@ def create_day(year: int, day: int):
     if not os.path.exists(dir_name + 'test.py'):
         with open('templates/test.py.template', 'r') as test_template:
             template = test_template.read()
-            filled_template = template.replace('{{YEAR}}', str(year)).replace('{{DAY}}', str(day))
+            filled_template = template.replace('{{YEAR}}', str(year)).replace('{{DAY}}', day_str)
 
             with open(dir_name + 'test.py', 'w') as output:
                 output.write(filled_template)

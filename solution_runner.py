@@ -15,7 +15,8 @@ class SolutionRunner:
 
     @staticmethod
     def get_solution(year: int, day: int, part: int):
-        solution_class_name = f'year_{year}.day_{day}.part{part}.Part{part}'
+        day_str = str(day).zfill(2)
+        solution_class_name = f'year_{year}.day_{day_str}.part{part}.Part{part}'
         solution_class = locate(solution_class_name)
         if not solution_class:
             raise Exception(f'No solution for day {day}, expected \'{solution_class_name}\' to exist.')
