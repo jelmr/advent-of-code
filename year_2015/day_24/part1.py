@@ -1,5 +1,4 @@
 import sys
-from functools import cache
 from typing import List
 
 from solution import Solution
@@ -29,7 +28,7 @@ class Part1(Solution):
 
             solved.add(mask1)
 
-        def explore(available, start_idx, mask1, weight1, mask2, weight2):
+        def explore(start_idx, mask1, weight1, mask2, weight2):
             if mask1 in solved:
                 return  # The distribution of packages in group 2/3 doesn't matter, so we abandon this branch
             if weight1 == desired:
@@ -40,24 +39,21 @@ class Part1(Solution):
             if weight1 == desired and weight2 == desired:
                 store_new_best(mask1)
 
-            try_mask = available & ~mask1
-
             idx = start_idx
-            try_mask >>= idx
+            try_mask = (full_mask & ~mask1 & ~mask2) >> idx
 
             while try_mask:
                 if try_mask & 1:
                     weight = weights[idx]
-                    new_available = available & ~(1 << idx)  # unset idx, it's been used
 
                     if weight1 == desired:  # G1 done, try filling G2
                         if weight2 + weight <= desired:
                             start_idx = 0 if weight2 + weight == desired else idx + 1
-                            explore(new_available, start_idx, mask1, weight1, mask2 | 1 << idx, weight2 + weight)
+                            explore(start_idx, mask1, weight1, mask2 | 1 << idx, weight2 + weight)
                     else:  # Try to fill G1
                         if weight1 + weight <= desired:
                             start_idx = 0 if weight1 + weight == desired else idx + 1
-                            explore(new_available, start_idx, mask1 | 1 << idx, weight1 + weight, mask2, weight2)
+                            explore(start_idx, mask1 | 1 << idx, weight1 + weight, mask2, weight2)
 
                 try_mask >>= 1
                 idx += 1
@@ -65,10 +61,9 @@ class Part1(Solution):
         weights = list(sorted(map(int, input_text), reverse=True))
         desired = sum(weights) // 3
         full_mask = (1 << len(weights)) - 1
-        fewest_packages = sys.maxsize
-        best_quantum = sys.maxsize
+        fewest_packages, best_quantum = sys.maxsize, sys.maxsize
         solved = set()
 
-        explore(full_mask, 0, 0, 0, 0, 0)
+        explore(0, 0, 0, 0, 0)
 
         return best_quantum
