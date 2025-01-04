@@ -48,9 +48,9 @@ if __name__ == "__main__":
     parser.add_argument('year', type=int, help='year number to download input for')
     parser.add_argument('day', type=int, help='day number to download input for')
     parser.add_argument('part', type=int, help='part number to download input for')
-    parser.add_argument('--example', dest='example', action='store_true', help='whether to run the example input')
+    parser.add_argument('-e', '--example', dest='example', action='store_true', help='whether to run the example input')
     parser.add_argument('-i', '--show-input', dest='show_input', action='store_true', help='whether to print the used input to the console')
-    parser.add_argument('--submit', dest='submit', action='store_true', help='whether to submit the answer to AoC')
+    parser.add_argument('-s', '--submit', dest='submit', action='store_true', help='whether to submit the answer to AoC')
     parser.set_defaults(example=False, submit=False, show_input=False)
     args = parser.parse_args()
 
