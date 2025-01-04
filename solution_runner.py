@@ -1,4 +1,5 @@
 import argparse
+import time
 from pydoc import locate
 from aoc_client import AocClient
 
@@ -32,9 +33,12 @@ class SolutionRunner:
             print(f'INPUT:')
             print('>>>', input_data)
 
+        start = time.time()
         result = self.solution.solve(input_data)
+        duration = time.time() - start
         print(f'OUTPUT:')
         print('>>>', result)
+        print(f'Time elapsed: {duration:.2f}')
 
         if submit:
             print('Submitting to Advent of Code!')
