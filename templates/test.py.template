@@ -7,11 +7,11 @@ from year_{{YEAR}}.day_{{DAY}}.part2 import Part2
 class TestSolver(unittest.TestCase):
     def test_examples_part1(self):
         solver = Part1()
-        self.assertEqual(solver.solve(['']), 0)
+        self.assertEqual(0, solver.solve(['']))
 
     def test_examples_part2(self):
         solver = Part2()
-        self.assertEqual(solver.solve(['']), 0)
+        self.assertEqual(0, solver.solve(['']))
 
 
 if __name__ == "__main__":
